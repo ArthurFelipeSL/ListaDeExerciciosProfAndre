@@ -1,0 +1,62 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class UrnaEletronica {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        Map<Integer, String> candidatos = new HashMap<>();
+        candidatos.put(1, "Candidato 1");
+        candidatos.put(2, "Candidato 2");
+        candidatos.put(3, "Candidato 3");
+        candidatos.put(4, "Candidato 4");
+        candidatos.put(5, "Candidato 5");
+        
+        Map<Integer, Integer> votos = new HashMap<>();
+        
+        int totalVotos = 0;
+        
+        while (true) {
+            System.out.print("Digite o número do candidato (ou 0 para encerrar): ");
+            int numeroCandidato = scanner.nextInt();
+            
+            if (numeroCandidato == 0) {
+                break;
+            }
+            
+            if (candidatos.containsKey(numeroCandidato)) {
+                int votosCandidato = votos.getOrDefault(numeroCandidato, 0);
+                votos.put(numeroCandidato, votosCandidato + 1);
+                totalVotos++;
+            } else {
+                System.out.println("Número de candidato inválido!");
+            }
+        }
+        
+        System.out.println("Número de votos totais: " + totalVotos);
+        
+        int maxVotos = 0;
+        int candidatoVencedor = 0;
+        
+        for (Map.Entry<Integer, Integer> entry : votos.entrySet()) {
+            int numeroCandidato = entry.getKey();
+            int numVotos = entry.getValue();
+            
+            if (numVotos > maxVotos) {
+                maxVotos = numVotos;
+                candidatoVencedor = numeroCandidato;
+            }
+            
+            System.out.println("Candidato " + numeroCandidato + ": " + numVotos + " votos");
+        }
+        
+        if (maxVotos > totalVotos / 2) {
+            System.out.println("O candidato vencedor é o número " + candidatoVencedor);
+        } else {
+            System.out.println("Nenhum candidato obteve mais de 50% dos votos.");
+        }
+        
+        scanner.close();
+    }
+}
