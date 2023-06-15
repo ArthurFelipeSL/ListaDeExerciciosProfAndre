@@ -1,0 +1,35 @@
+
+import java.util.Scanner;
+
+public class Boletim {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Digite o nome do aluno: ");
+        String nome = scanner.nextLine();
+        
+        double[] notas = new double[5];
+        
+        double somaNotas = 0;
+        
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Digite a nota " + (i + 1) + ": ");
+            notas[i] = scanner.nextDouble();
+            somaNotas += notas[i];
+        }
+        
+        double media = somaNotas / 5;
+        
+        System.out.println("Média: " + media);
+        
+        if (media >= 60) {
+            System.out.println(nome + " Aluno aprovado!");
+        } else if (media < 40) {
+            System.out.println(nome + " Aluno reprovado!");
+        } else {
+            System.out.println(nome + " Aluno em recuperação.");
+        }
+        
+        scanner.close();
+          }
+      }
